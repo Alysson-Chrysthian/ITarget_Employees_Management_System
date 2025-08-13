@@ -22,7 +22,7 @@ class ShowEmployees extends Component
     
     public function modify($id)
     {
-        //TODO
+        return $this->redirect('/update/' . $id);
     }
 
     #[Layout('components.layouts.main')]
