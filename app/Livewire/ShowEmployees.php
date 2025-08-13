@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class ShowEmployees extends Component
 {
-    public $search;
+    public $search = '';
 
     public function create()
     {
@@ -21,11 +21,6 @@ class ShowEmployees extends Component
     }
     
     public function modify($id)
-    {
-        //TODO
-    }
-
-    public function searchEmployee()
     {
         //TODO
     }

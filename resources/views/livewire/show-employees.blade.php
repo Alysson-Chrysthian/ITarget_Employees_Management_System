@@ -12,13 +12,7 @@
         class="flex gap-4"
     >
         <div>
-            <form 
-                class="flex gap-2"
-                wire:submit="searchEmployee"
-            >
-                <x-text-input wire:model="search">Pesquisar...</x-text-input>
-                <x-button-dark wire:target="search"><x-css-search/></x-button-dark>
-            </form>
+            <x-text-input wire:model.live="search">Pesquisar...</x-text-input>
         </div>
         <div>
             <x-button-light
@@ -59,6 +53,9 @@
                 </tr>
             </thead>
             <tbody class="bg-gray-100 rounded-b-md">
+                @if ($employees->isEmpty())
+                    <p>Nenhum funcionario encontrado</p>
+                @endif
                 @foreach ($employees as $employee)
                     <tr class="border-b-2 border-gray-400 hover:bg-gray-50">
                         <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->id }}</td>
