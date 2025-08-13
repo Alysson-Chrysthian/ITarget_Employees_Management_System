@@ -14,9 +14,10 @@
         <div>
             <form 
                 class="flex gap-2"
+                wire:submit="searchEmployee"
             >
-                <x-text-input>Pesquisar...</x-text-input>
-                <x-button-dark><x-css-search/></x-button-dark>
+                <x-text-input wire:model="search">Pesquisar...</x-text-input>
+                <x-button-dark wire:target="search"><x-css-search/></x-button-dark>
             </form>
         </div>
         <div>
@@ -36,33 +37,43 @@
         </div>
     </div>
 
-    <div>
-        <table>
+    <div class="overflow-x-auto">
+        <table class="min-w-full border-collapse">
             <thead 
-                class="
-                    bg-gray-200 border-b-2 border-gray-400
-                    rounded-t-md block
-                "
+                class="bg-gray-200 border-b-2 border-gray-400 rounded-t-md"
             >
-                <th class="text-gray-800 text-normal px-4 py-2">ID</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Nome</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Email</th>
-                <th class="text-gray-800 text-normal px-4 py-2">CPF</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Matricula</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Sexo</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Nascimento</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Rua</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Numero</th>
-                <th class="text-gray-800 text-normal px-4 py-2">Bairro</th>
-                <th class="text-gray-800 text-normal px-4 py-2">CEP</th>
+                <tr>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">ID</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Nome</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Email</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">CPF</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Matricula</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Sexo</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Nascimento</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Rua</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Numero</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Bairro</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">CEP</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Editar</th>
+                    <th class="text-gray-800 text-normal px-4 py-2 whitespace-nowrap">Deletar</th>
+                </tr>
             </thead>
-            <tbody class="
-                bg-gray-100
-                rounded-t-md
-            ">
+            <tbody class="bg-gray-100 rounded-b-md">
                 @foreach ($employees as $employee)
-                    <tr>
-                        <td>{{ $employee->id }}</td>
+                    <tr class="border-b-2 border-gray-400 hover:bg-gray-50">
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->id }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->name }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->email }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->cpf }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->registration }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->gender }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->birthday->format('d/m/Y') }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->street }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->number }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->linguee }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->cep }}</td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap"><x-css-trash class="m-auto cursor-pointer brightness-135" wire:click="delete({{ $employee->id }})"/></td>
+                        <td class="text-gray-600 px-4 py-2 whitespace-nowrap"><x-css-pen class="m-auto cursor-pointer brightness-135" wire:click="modify({{ $employee->id }})"/></td>
                     </tr>
                 @endforeach
             </tbody>

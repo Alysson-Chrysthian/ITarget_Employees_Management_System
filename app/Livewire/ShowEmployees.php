@@ -8,9 +8,26 @@ use Livewire\Component;
 
 class ShowEmployees extends Component
 {
+    public $search;
+
     public function create()
     {
         return $this->redirect('/create');
+    }
+
+    public function delete(Employee $employee)
+    {
+        $employee->delete();
+    }
+    
+    public function modify($id)
+    {
+        //TODO
+    }
+
+    public function searchEmployee()
+    {
+        //TODO
     }
 
     #[Layout('components.layouts.main')]
