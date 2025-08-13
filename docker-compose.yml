@@ -1,0 +1,11 @@
+services:
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_USER: itarget
+    ports:
+      - 5432:5432
+    volumes:
+      - ./datadir/pgsql/:/var/lib/postgresql/data
