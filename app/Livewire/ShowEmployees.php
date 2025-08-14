@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Employee;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -26,6 +27,18 @@ class ShowEmployees extends Component
     public function modify($id)
     {
         return $this->redirect('/update/' . $id);
+    }
+
+    public function generatePaper()
+    {
+        $pdf = Pdf::loadView('pdfs.employees-paper', [
+            'employees' => Employee::all(),
+        ]);
+        $pdf->setOption('defaultFont', 'sans-serif');
+
+        return response()->streamDownload(function () use ($pdf) {
+            echo $pdf->stream();
+        }, 'relatorio.pdf');    
     }
 
     #[Layout('components.layouts.main')]

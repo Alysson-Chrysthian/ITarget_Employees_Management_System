@@ -25,6 +25,7 @@
         <div>
             <x-button-light
                 type="button"
+                wire:click="generatePaper"
             >
                 <x-css-file />
             </x-button-light>
