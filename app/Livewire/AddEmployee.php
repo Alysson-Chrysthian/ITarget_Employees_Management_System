@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Http;
 use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class AddEmployee extends Component
@@ -84,6 +85,20 @@ class AddEmployee extends Component
     public function index()
     {
         return $this->redirect('/');
+    }
+
+    #[On('cep-input-filled')]
+    public function fillLingueeByCEP()
+    {
+        $this->validateOnly('cep');
+
+        $response = Http::get('https://viacep.com.br/ws/' . $this->cep . '/json');
+        $response = json_decode($response, true);
+
+        if (isset($response['erro']))
+            return $this->addError('cep', 'O CEP inserido nao existe');
+
+        $this->linguee = $response['bairro'];
     }
 
     #[Layout('components.layouts.main')]

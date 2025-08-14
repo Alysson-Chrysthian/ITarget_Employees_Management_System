@@ -81,17 +81,17 @@
                         @enderror
                     </div>
                 </div>
-                <div class="flex justify-between gap-2">
-                    <div class="grow">
+                <div class="flex flex-row-reverse justify-between gap-2">
+                    <div>
                         <label>Bairro</label>
-                        <x-text-input wire:model="linguee">Bairro</x-text-input>
+                        <x-text-input wire:model="linguee" id="linguee_input">Bairro</x-text-input>
                         @error('linguee')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
+                    <div  class="grow">
                         <label>CEP</label>
-                        <x-text-input wire:model="cep">CEP</x-text-input>
+                        <x-text-input wire:model="cep" id="input_cep">CEP</x-text-input>
                         @error('cep')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror
@@ -108,3 +108,15 @@
         </div>
     </form>
 </div>
+
+@push('scripts')
+    @script
+        <script>
+            const cep_input = document.getElementById('input_cep');
+            
+            cep_input.addEventListener('focusout', (e) => {
+                $wire.dispatch('cep-input-filled');
+            });
+        </script>
+    @endscript
+@endpush
