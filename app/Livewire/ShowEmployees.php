@@ -12,7 +12,7 @@ class ShowEmployees extends Component
 {
     use WithPagination;
 
-    public $search = '';
+    public $search = '', $filter = 'id';
 
     public function create()
     {
@@ -49,14 +49,7 @@ class ShowEmployees extends Component
     #[Layout('components.layouts.main')]
     public function render()
     {
-        $employees = Employee::where('id', 'like', '%' . $this->search . '%')
-            ->orWhere('name', 'like', '%' . $this->search . '%')
-            ->orWhere('email', 'like', '%' . $this->search . '%')
-            ->orWhere('cpf', 'like', '%' . $this->search . '%')
-            ->orWhere('cep', 'like', '%' . $this->search . '%')
-            ->orWhere('street', 'like', '%' . $this->search . '%')
-            ->orWhere('linguee', 'like', '%' . $this->search . '%')
-            ->orWhere('registration', 'like', '%' . $this->search . '%')
+        $employees = Employee::where($this->filter, 'like', '%' . $this->search . '%')
             ->paginate(10);
 
         return view('livewire.show-employees', [

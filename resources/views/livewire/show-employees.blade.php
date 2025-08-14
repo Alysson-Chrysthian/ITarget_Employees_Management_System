@@ -11,7 +11,17 @@
     <div 
         class="flex gap-4"
     >
-        <div>
+        <div class="flex gap-4">
+            <x-select-input wire:model.live="filter">
+                <option value="id">Buscar por id</option>
+                <option value="name">Buscar por nome</option>
+                <option value="email">Buscar por email</option>
+                <option value="cpf">Buscar por cpf</option>
+                <option value="cep">Buscar por cep</option>
+                <option value="registration">Buscar por matricula</option>
+                <option value="street">Buscar por rua</option>
+                <option value="linguee">Buscar por bairro</option>
+            </x-select-input>
             <x-text-input wire:model.live="search">Pesquisar...</x-text-input>
         </div>
         <div>
