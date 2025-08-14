@@ -98,7 +98,8 @@ class AddEmployee extends Component
         if (isset($response['erro']))
             return $this->addError('cep', 'O CEP inserido nao existe');
 
-        $this->linguee = $response['bairro'];
+        if (!empty($response['bairro']))
+            $this->linguee = $response['bairro'];
     }
 
     #[Layout('components.layouts.main')]

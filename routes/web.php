@@ -20,7 +20,7 @@ Route::middleware('auth:admin')
         Route::get('/create', App\Livewire\AddEmployee::class)
             ->name('create');
 
-        Route::get('/update/{id}', App\Livewire\UpdateEmployees::class)
+        Route::get('/update/{employee}', App\Livewire\UpdateEmployees::class)
             ->name('update');
 
     });
