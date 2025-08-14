@@ -34,7 +34,12 @@ class ShowEmployees extends Component
         $pdf = Pdf::loadView('pdfs.employees-paper', [
             'employees' => Employee::all(),
         ]);
-        $pdf->setOption('defaultFont', 'sans-serif');
+        $pdf->setPaper('a4', 'portrait');
+        $pdf->setOptions([
+            'defaultFont' => 'sans-serif',
+            'fontHeightRatio' => 0.8,
+
+        ]);
 
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->stream();
