@@ -70,7 +70,7 @@
                             <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->number }}</td>
                             <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->linguee }}</td>
                             <td class="text-gray-600 px-4 py-2 whitespace-nowrap">{{ $employee->cep }}</td>
-                            <td class="text-gray-600 px-4 py-2 whitespace-nowrap"><x-css-trash class="m-auto cursor-pointer brightness-135" wire:click="delete({{ $employee->id }})"/></td>
+                            <td class="text-gray-600 px-4 py-2 whitespace-nowrap"><x-css-trash class="m-auto cursor-pointer brightness-135" wire:confirm="Tem certeza que deseja excluir" wire:click="delete({{ $employee->id }})"/></td>
                             <td class="text-gray-600 px-4 py-2 whitespace-nowrap"><x-css-pen class="m-auto cursor-pointer brightness-135" wire:click="modify({{ $employee->id }})"/></td>
                         </tr>
                     @endforeach
