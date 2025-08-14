@@ -5,9 +5,12 @@ namespace App\Livewire;
 use App\Models\Employee;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class ShowEmployees extends Component
 {
+    use WithPagination;
+
     public $search = '';
 
     public function create()
@@ -36,7 +39,7 @@ class ShowEmployees extends Component
             ->orWhere('street', 'like', '%' . $this->search . '%')
             ->orWhere('linguee', 'like', '%' . $this->search . '%')
             ->orWhere('registration', 'like', '%' . $this->search . '%')
-            ->get();
+            ->paginate(10);
 
         return view('livewire.show-employees', [
             'employees' => $employees,
