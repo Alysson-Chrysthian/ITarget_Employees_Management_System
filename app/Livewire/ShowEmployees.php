@@ -29,23 +29,6 @@ class ShowEmployees extends Component
         return $this->redirect('/update/' . $id);
     }
 
-    public function generatePaper()
-    {
-        $pdf = Pdf::loadView('pdfs.employees-paper', [
-            'employees' => Employee::all(),
-        ]);
-        $pdf->setPaper('a4', 'portrait');
-        $pdf->setOptions([
-            'defaultFont' => 'sans-serif',
-            'fontHeightRatio' => 0.8,
-
-        ]);
-
-        return response()->streamDownload(function () use ($pdf) {
-            echo $pdf->stream();
-        }, 'relatorio.pdf');    
-    }
-
     #[Layout('components.layouts.main')]
     public function render()
     {

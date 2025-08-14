@@ -33,12 +33,13 @@
             </x-button-light>
         </div>
         <div>
-            <x-button-light
-                type="button"
-                wire:click="generatePaper"
-            >
-                <x-css-file />
-            </x-button-light>
+            <a href="/paper/all-employees" target="_blank">
+                <x-button-light
+                    type="button"
+                >
+                    <x-css-file />
+                </x-button-light>
+            </a>
         </div>
     </div>
 

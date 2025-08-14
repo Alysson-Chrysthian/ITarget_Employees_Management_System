@@ -23,5 +23,7 @@ Route::middleware('auth:admin')
         Route::get('/update/{employee}', App\Livewire\UpdateEmployees::class)
             ->name('update');
 
+
+        Route::get('/paper/all-employees', [App\Http\Controllers\PaperController::class, 'generatePaperForAllEmployees'])
+            ->name('paper.all-employees');
     });
-    
