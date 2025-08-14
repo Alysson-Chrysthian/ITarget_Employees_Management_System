@@ -14,6 +14,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $adminSeeder = new AdminSeeder();
+        $employeeSeeder = new EmployeeSeeder();
+     
         $adminSeeder->run();
+        $employeeSeeder->run();
     }
 }
