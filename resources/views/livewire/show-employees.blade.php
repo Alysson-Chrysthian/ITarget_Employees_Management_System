@@ -1,7 +1,3 @@
-@push('styles')
-    @vite('resources/css/show-employess.css')
-@endpush
-
 <div 
     class="
         p-4 flex flex-col gap-4
