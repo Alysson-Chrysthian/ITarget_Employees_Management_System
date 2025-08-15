@@ -32,7 +32,7 @@ class ShowEmployees extends Component
     #[Layout('components.layouts.main')]
     public function render()
     {
-        $employees = Employee::where($this->filter, 'like', '%' . $this->search . '%')
+        $employees = Employee::where($this->filter, 'ilike', '%' . $this->search . '%')
             ->paginate(10);
 
         return view('livewire.show-employees', [
