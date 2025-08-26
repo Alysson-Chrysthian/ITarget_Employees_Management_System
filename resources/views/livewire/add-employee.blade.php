@@ -47,7 +47,7 @@
             </div>
             <div>
                 <label>CPF</label>
-                <x-text-input wire:model="cpf" name="cpf">CPF</x-text-input>
+                <x-text-input wire:model="cpf" data-inputmask="'mask': '999.999.999-99'" name="cpf">CPF</x-text-input>
                 @error('cpf')
                     <p class="text-red-500">{{ $message }}</p>
                 @enderror
@@ -91,7 +91,7 @@
                     </div>
                     <div  class="grow">
                         <label>CEP</label>
-                        <x-text-input wire:model="cep" id="input_cep">CEP</x-text-input>
+                        <x-text-input wire:model="cep" data-inputmask="'mask': '99999-999'" id="input_cep">CEP</x-text-input>
                         @error('cep')
                             <p class="text-red-500">{{ $message }}</p>
                         @enderror

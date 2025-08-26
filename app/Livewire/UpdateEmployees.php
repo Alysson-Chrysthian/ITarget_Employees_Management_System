@@ -23,14 +23,14 @@ class UpdateEmployees extends Component
         return [
             'employee_attr.name' => 'required',
             'employee_attr.email' => 'required|email',
-            'employee_attr.cpf' => 'required|digits:11|numeric',
+            'employee_attr.cpf' => 'required|size:14|string|regex:#^([0-9]{3})\.([0-9]{3})\.([0-9]{3})\-([0-9]{2})$#',
             'employee_attr.registration' => 'required|digits:7|numeric',
             'employee_attr.birthday' => 'required|date',
             'employee_attr.street' => 'required',
             'employee_attr.number' => 'required|numeric',
             'employee_attr.linguee' => 'required',
             'employee_attr.gender' => 'required|in:m,f',
-            'employee_attr.cep' => 'required|digits:8|numeric', 
+            'employee_attr.cep' => 'required|size:9|string|regex:#^([0-9]{5})\-([0-9]{3})$#', 
         ];
     }
 
@@ -50,6 +50,9 @@ class UpdateEmployees extends Component
     public function update()
     {
         $this->validate();
+
+        $this->employee_attr['cep'] = str_replace('-', '', $this->employee_attr['cep']);
+        $this->employee_attr['cpf'] = str_replace(['-', '.'], '', $this->employee_attr['cpf']);
 
         $response = Http::get('https://viacep.com.br/ws/' . $this->employee_attr['cep'] . '/json');
         $response = json_decode($response, true);

@@ -17,14 +17,14 @@ class AddEmployee extends Component
         return [
             'name' => 'required',
             'email' => 'required|email',
-            'cpf' => 'required|digits:11|numeric',
+            'cpf' => 'required|size:14|string|regex:#^([0-9]{3})\.([0-9]{3})\.([0-9]{3})\-([0-9]{2})$#',
             'registration' => 'required|digits:7|numeric',
             'birthday' => 'required|date',
             'street' => 'required',
             'number' => 'required|numeric',
             'linguee' => 'required',
             'gender' => 'required|in:m,f',
-            'cep' => 'required|digits:8|numeric', 
+            'cep' => 'required|size:9|string|regex:#^([0-9]{5})\-([0-9]{3})$#', 
         ];
     }
 
@@ -44,6 +44,9 @@ class AddEmployee extends Component
     public function store()
     {
         $this->validate();
+
+        $this->cep = str_replace('-', '', $this->cep);
+        $this->cpf = str_replace(['-', '.'], '', $this->cpf);
 
         $response = Http::get('https://viacep.com.br/ws/' . $this->cep . '/json');
         $response = json_decode($response, true);
